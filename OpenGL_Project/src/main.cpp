@@ -28,7 +28,7 @@ static ShaderProgramSource ParseShader(const std::string& filepath)
 	ShaderType type = ShaderType::NONE;
 	while (getline(stream, line))
 	{
-		if (line.find("#shader") != std::string::npos)
+		if (line.find("#shader") != std::string::npos) 
 		{
 			if (line.find("vertex") != std::string::npos)
 				type = ShaderType::VERTEX;
