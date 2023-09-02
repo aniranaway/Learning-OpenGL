@@ -10,6 +10,7 @@
 #include "VertexArray.h"
 #include "VertexBufferLayout.h"
 #include "Shader.h"
+#include "Texture.h"
 int main()
 {
 	/* Initialize GLFW */
@@ -49,10 +50,10 @@ int main()
 	/* Provide data for drawing*/
 	{
 		float vertices[] = {
-			-0.5f, -0.5f,
-			 0.5f, -0.5f,
-			 0.5f,  0.5f,
-			-0.5f,  0.5f,
+			-0.5f, -0.5f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 1.0f
 
 		};
 
@@ -67,6 +68,7 @@ int main()
 		VertexArray va;
 		VertexBufferLayout layout;
 		layout.Push<float>(2);
+		layout.Push<float>(2);
 		va.AddBuffer(vb,layout);
 
 
@@ -76,6 +78,12 @@ int main()
 		Shader shader("res/shaders/basic.shader");
 		shader.Bind();
 		shader.SetUniform("u_Color", 1.0f, 0.0f, 0.0f, 0.0f);
+
+		Texture texture("res/textures/Dodo.jpg");
+		texture.Bind();
+		shader.SetUniform1i("u_Texture", 0);
+
+
 		shader.Unbind();
 		vb.Unbind();
 		ib.Unbind();
